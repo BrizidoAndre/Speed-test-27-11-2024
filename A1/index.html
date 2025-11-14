@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta lang="">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
+    <title>Doca de Ampliação</title>
+</head>
+<body>
+<div class="container">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</div>
+<div class="light"></div>
+</body>
+<script>
+    let boxes = document.querySelectorAll('.box');
+    let light = document.querySelector('.light')
+
+    let mouseX;
+    let mouseY;
+    const maxDistance = 340;
+
+    window.addEventListener('mousemove', ev => {
+        mouseY = ev.y;
+        mouseX = ev.x;
+        light.style.top = mouseY + 'px';
+        light.style.left = mouseX + 'px';
+
+        boxes.forEach((box, index) => {
+            let coordinates = box.getBoundingClientRect();
+            let xPosition = coordinates.x;
+            let yPosition = coordinates.y;
+            let centerXPosition = xPosition + 40;
+            let centerYPosition = yPosition + 40;
+
+            let distanceX = Math.abs(mouseX - centerXPosition);
+            let distanceY = Math.abs(mouseY - centerYPosition);
+            if (distanceX < maxDistance && distanceY < maxDistance) {
+                let distanceGeneral = ((distanceX + distanceY)/2)/100;
+                let scale = Math.abs((distanceGeneral - 3)/10);
+                console.log(scale);
+                box.style.scale = (1 + scale).toString();
+            }
+        })
+    })
+
+</script>
+</html>

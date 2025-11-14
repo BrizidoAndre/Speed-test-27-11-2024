@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Placa de exibição digital </title>
+    <style>
+        :root {
+            --blue: #4f4fb1;
+        }
+
+        .container-display {
+            background: #000;
+            width: 100%;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #content {
+            white-space: nowrap;
+            display: inline-block;
+            font-size: 4rem;
+            background-clip: text;
+            background-image: repeating-linear-gradient(to bottom, black 0px, black 2px, transparent 2px, transparent 4px),
+            repeating-linear-gradient(to right, var(--blue) 0px, var(--blue) 2px, black 2px, black 4px);
+            color: transparent;
+            position: absolute;
+            animation-name: slide;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes slide {
+            from {
+                left: 100%;
+                transform: translateX(100%);
+
+            }
+            to {
+                left: 0;
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="">
+    <label for="text">Insira o texto</label>
+    <input type="text" id="text" value="Foi">
+</form>
+<div class="container-display">
+    <h2 id="content">Foi</h2>
+</div>
+<script>
+    text.addEventListener('input', ev => {
+        content.innerHTML = ev.target.value;
+        let duration = ev.target.value.split('').length * .2 + 1.5;
+        content.style.animationDuration = duration + 's';
+    })
+</script>
+</body>
+</html>
